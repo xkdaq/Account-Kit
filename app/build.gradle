@@ -10,10 +10,41 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    signingConfigs {
+        config {
+            storeFile file("key/accountkit.jks")
+            storePassword "accountkit"
+            keyAlias "accountkit"
+            keyPassword "accountkit"
+        }
+    }
+
+
     buildTypes {
-        release {
+        debug {
+            versionNameSuffix "-debug"
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            zipAlignEnabled false
+            signingConfig signingConfigs.config
+        }
+
+
+        release {
+            minifyEnabled true
+            zipAlignEnabled true
+            signingConfig signingConfigs.config
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationVariants.all { variant ->
+                variant.outputs.all { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk') && outputFile.name.contains("release")) {
+                        outputFileName = "AccountKit_${defaultConfig.versionCode}_${defaultConfig.versionName}_release.apk"
+                    } else {
+                        outputFileName = "AccountKit_${defaultConfig.versionCode}_${defaultConfig.versionName}_debug.apk"
+                    }
+                }
+            }
         }
     }
 }
