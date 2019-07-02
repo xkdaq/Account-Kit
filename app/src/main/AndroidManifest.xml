@@ -53,6 +53,7 @@
         <activity
             android:name=".AccountActivity"
             android:theme="@style/FullTheme" />
+        <activity android:name=".PrivacyActivity" />
     </application>
 
 </manifest>

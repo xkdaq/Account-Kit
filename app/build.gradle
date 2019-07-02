@@ -6,8 +6,8 @@ android {
         applicationId "com.account.kit"
         minSdkVersion 16
         targetSdkVersion 27
-        versionCode 2
-        versionName "1.1"
+        versionCode 3
+        versionName "1.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
@@ -54,7 +54,7 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:27.0.2'
 
     implementation 'com.facebook.android:account-kit-sdk:5.+'
-    compile 'com.facebook.android:facebook-android-sdk:5.1.0'
+    implementation 'com.facebook.android:facebook-android-sdk:5.1.0'
 
 
 }

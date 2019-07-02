@@ -15,7 +15,7 @@ import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
 import com.facebook.appevents.AppEventsLogger;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static int APP_REQUEST_CODE = 99;
 
@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        findViewById(R.id.tv_privacy).setOnClickListener(this);
 
         // check for an existing access token
         AccessToken accessToken = AccountKit.getCurrentAccessToken();
@@ -93,5 +95,13 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, AccountActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onClick(View view) {
+        int id = view.getId();
+        if (id == R.id.tv_privacy) {
+            startActivity(new Intent(this, PrivacyActivity.class));
+        }
     }
 }
