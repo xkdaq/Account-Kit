@@ -6,6 +6,8 @@
 
 接Facebook的Account kit的
 
+配置:https://www.jianshu.com/p/2de1084fbb76
+
 
 ### 截图
 
