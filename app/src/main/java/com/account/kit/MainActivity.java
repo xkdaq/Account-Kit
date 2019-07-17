@@ -3,13 +3,16 @@ package com.account.kit;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.facebook.accountkit.AccessToken;
 import com.facebook.accountkit.AccountKit;
 import com.facebook.accountkit.AccountKitLoginResult;
+import com.facebook.accountkit.PhoneNumber;
 import com.facebook.accountkit.ui.AccountKitActivity;
 import com.facebook.accountkit.ui.AccountKitConfiguration;
 import com.facebook.accountkit.ui.LoginType;
@@ -18,6 +21,7 @@ import com.facebook.appevents.AppEventsLogger;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static int APP_REQUEST_CODE = 99;
+    private EditText etPhone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         findViewById(R.id.tv_privacy).setOnClickListener(this);
+        etPhone = (EditText) findViewById(R.id.et_phone_phone);
 
         // check for an existing access token
         AccessToken accessToken = AccountKit.getCurrentAccessToken();
@@ -41,18 +46,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         AppEventsLogger logger = AppEventsLogger.newLogger(this);
         logger.logEvent("onPhoneLogin");
 
-        onLogin(LoginType.PHONE);
+        String fmMobile = etPhone.getText().toString().trim();
+
+        onLogin("", LoginType.PHONE);
+        //onLogin(fmMobile.substring(4), LoginType.PHONE);
     }
 
     public void onEmailLogin(View view) {
         AppEventsLogger logger = AppEventsLogger.newLogger(this);
         logger.logEvent("onEmailLogin");
 
-        onLogin(LoginType.EMAIL);
+        onLogin("", LoginType.EMAIL);
     }
 
 
-    private void onLogin(final LoginType loginType) {
+    private void onLogin(String phone, final LoginType loginType) {
         // create intent for the Account Kit activity
         final Intent intent = new Intent(this, AccountKitActivity.class);
 
@@ -62,7 +70,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         loginType,
                         AccountKitActivity.ResponseType.TOKEN
                 );
-        //configurationBuilder.setInitialPhoneNumber(new PhoneNumber())
+        if (TextUtils.isEmpty(phone)) {
+            String[] smsWhitelist = {"ID"};
+            configurationBuilder.setSMSWhitelist(smsWhitelist);
+            //configurationBuilder.setInitialPhoneNumber(new PhoneNumber("62", phone, Locale.getDefault().getCountry()));
+            configurationBuilder.setInitialPhoneNumber(new PhoneNumber("62", phone));
+        }
         final AccountKitConfiguration configuration = configurationBuilder.build();
 
         // launch the Account Kit activity

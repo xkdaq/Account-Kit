@@ -33,6 +33,31 @@
         android:layout_marginRight="20dp"
         android:orientation="vertical">
 
+        <EditText
+            android:id="@+id/et_phone_phone"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:background="@null"
+            android:ellipsize="end"
+            android:hint="Masukkan nomor ponsel anda"
+            android:inputType="numberDecimal"
+            android:maxLength="15"
+            android:singleLine="true"
+            android:textColor="#333333"
+            android:textColorHint="#eeeeee"
+            android:textSize="14sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="100dp"
+            android:background="#eeeeee" />
+
         <Button
             android:id="@+id/phone_login_button"
             android:layout_width="match_parent"
@@ -61,11 +86,11 @@
             android:id="@+id/tv_privacy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_marginBottom="20dp"
+            android:gravity="center"
             android:padding="10dp"
-            android:textColor="@android:color/holo_blue_dark"
-            android:text="《Account Kit Privacy》" />
+            android:text="《Account Kit Privacy》"
+            android:textColor="@android:color/holo_blue_dark" />
 
 
     </LinearLayout>

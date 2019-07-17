@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,6 +44,7 @@ public class AccountActivity extends AppCompatActivity {
                 PhoneNumber phoneNumber = account.getPhoneNumber();
                 if (account.getPhoneNumber() != null) {
                     // if the phone number is available, display it
+                    Log.e("xuke", "phoneNumber = " + phoneNumber.toString());
                     String formattedPhoneNumber = formatPhoneNumber(phoneNumber.toString());
                     tvAccount.setText(String.format(getString(R.string.text_account), formattedPhoneNumber));
                 } else {
